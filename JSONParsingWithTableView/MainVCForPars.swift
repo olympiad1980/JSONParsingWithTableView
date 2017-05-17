@@ -7,7 +7,7 @@ class MainVCForPars: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NewsModel().fetchArctices()
+        NewsNetworkModel().fetchArctices()
     }
 }
 

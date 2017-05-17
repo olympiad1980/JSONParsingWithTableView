@@ -15,7 +15,7 @@ class ArticleCell: UITableViewCell {
     }
 }
 
-extension ArticleCell {
+fileprivate extension ArticleCell {
     
     func initArticle() {
         if let setupCell = setupCell {

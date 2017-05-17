@@ -14,21 +14,23 @@ struct News {
     
 }
 
-class NewsModel {
+class NewsNetworkModel {
     
     private var arcticesArray: [News] = []
-    private let delegate: NewsManagerDelegate? = nil
+    let delegate: NewsManagerDelegate? = nil
     
     func fetchArctices() {
         
-        let url = URL.init(string: "https://newsapi.org/v1/articles?source=al-jazeera-english&sortBy=top&apiKey=4f3ad7637a534b788fcba09428886b62")!
-        
+        let url = URL(string: "https://newsapi.org/v1/articles?source=al-jazeera-english&sortBy=top&apiKey=4f3ad7637a534b788fcba09428886b62")!
+    
         URLSession.shared.dataTask(with: url) { data, _, _ in
             
             guard let data = data else {
                 print("data was nil?")
                 return
             }
+            
+            print("data count \(data.count)")
             
             let json = JSON.init(data: data)
             let jsonArray = json["articles"].arrayValue
@@ -38,6 +40,8 @@ class NewsModel {
                 let author = item["author"].stringValue
                 let url = item["url"].stringValue
                 let urlToImage = item["urlToImage"].stringValue
+                
+                print("Author: \(author)")
                 
                 let arctices = News(title: title, desc: desc, author: author, url: url, imageUrl: urlToImage)
                 if let delegate = self.delegate {
